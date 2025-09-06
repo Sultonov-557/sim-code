@@ -1,0 +1,17 @@
+{
+	"file_manager": {
+		"empty_space": {
+			"char": "|  ",
+			"fg": "red",
+			"bg": "none"
+		},
+		"folder": {
+			"fg": "red",
+			"bg": "none"
+		},
+		"file": {
+			"fg": "green",
+			"bg": "none"
+		}
+	}
+}

@@ -1,7 +1,7 @@
 import fs from "fs";
 import { join } from "path";
 
-const ignoreList = ["node_modules"];
+const ignoreList = ["node_modules", ".git"];
 const workDir = process.cwd();
 
 function readFileTree(path: string) {
@@ -23,6 +23,8 @@ function readFileTree(path: string) {
 	return tree;
 }
 
-export function getFileTree(path: string) {
+export function getFileTree() {
 	return readFileTree(workDir);
 }
+
+console.log(getFileTree());

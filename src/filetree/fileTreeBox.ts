@@ -1,5 +1,6 @@
 import blessed from "blessed";
 import { getFileTree } from "./fileTree";
+import config from "../../config.json";
 
 let fileTreeBoxR: blessed.Widgets.BoxElement;
 
@@ -9,6 +10,7 @@ export function fileTreeBox(screen: blessed.Widgets.Screen) {
 		height: "100%",
 		width: "20%",
 		align: "left",
+		tags: true,
 		border: { type: "line" },
 		style: {
 			border: {
@@ -21,7 +23,7 @@ export function fileTreeBox(screen: blessed.Widgets.Screen) {
 }
 
 function updateFileTreeBox() {
-	const fileTree = getFileTree(process.cwd());
+	const fileTree = getFileTree();
 
 	const fileTreeSorted = sortFileTree(fileTree);
 	for (let fileName in fileTreeSorted) {
@@ -32,13 +34,18 @@ function updateFileTreeBox() {
 
 function addFileNode(depth = 0, name: string, node: any) {
 	if (typeof node == "object") {
-		fileTreeBoxR.pushLine(" ".repeat(depth) + name);
+		fileTreeBoxR.pushLine(
+			`{${config.file_manager.empty_space.fg}-fg}${config.file_manager.empty_space.char.repeat(depth)}{/${config.file_manager.empty_space.fg}-fg}` +
+				`{${config.file_manager.folder.fg}-fg}${name}{/${config.file_manager.folder.fg}-fg}`,
+		);
 		for (let fileName in node) {
 			addFileNode(depth + 1, fileName, node[fileName]);
 		}
 	}
-	if (typeof node == "string") {
-		fileTreeBoxR.pushLine(" ".repeat(depth) + name);
+	if (typeof node == "number") {
+		fileTreeBoxR.pushLine(
+			`${config.file_manager.empty_space.char.repeat(depth)}{${config.file_manager.file.fg}-fg}${name}{/${config.file_manager.file.fg}-fg}`,
+		);
 	}
 }
 
