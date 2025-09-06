@@ -1,12 +1,14 @@
-import blessed from "blessed";
-import { fileTreeBox } from "./filetree/fileTreeBox";
+import { parseArgs } from "./cli/args";
+import { createScreen } from "./ui/screen";
+import { Editor } from "./ui/editor";
+import { Buffer } from "./core/buffer";
 
-const screen = blessed.screen({ smartCSR: true });
+const args = parseArgs(process.argv);
 
-screen.append(fileTreeBox(screen));
-
-screen.key(["escape", "q", "C-c"], function (ch, key) {
-	return process.exit(0);
-});
-
-screen.render();
+console.log(args);
+const screen = createScreen();
+if (typeof args.file == "string") {
+	const buffer = new Buffer(args.file, { readonly: args.readonly });
+	const editor = new Editor(screen, { buffer, startLine: args.startLine });
+	editor.focus();
+}

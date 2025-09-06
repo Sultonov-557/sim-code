@@ -1,16 +1,19 @@
 {
-  "name": "sim",
-  "module": "index.ts",
-  "type": "module",
-  "private": true,
-  "devDependencies": {
-    "@types/bun": "latest"
-  },
-  "peerDependencies": {
-    "typescript": "^5"
-  },
-  "dependencies": {
-    "@types/blessed": "^0.1.25",
-    "blessed": "^0.1.81"
-  }
+	"name": "sim",
+	"module": "index.ts",
+	"type": "module",
+	"private": true,
+	"devDependencies": {
+		"@types/bun": "latest"
+	},
+	"peerDependencies": {
+		"typescript": "^5"
+	},
+	"dependencies": {
+		"@types/blessed": "^0.1.25",
+		"@types/yargs": "^17.0.33",
+		"blessed": "^0.1.81",
+		"neo-blessed": "^0.2.0",
+		"yargs": "^18.0.0"
+	}
 }
